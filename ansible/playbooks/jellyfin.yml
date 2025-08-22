@@ -1,0 +1,7 @@
+- name: Deploy Jellyfin with Docker
+  hosts: media
+  become: yes
+
+  roles:
+    - jellyfin
+
