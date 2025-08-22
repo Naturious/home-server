@@ -1,4 +1,3 @@
-version: "3.7"
 services:
   jellyfin:
     image: jellyfin/jellyfin:latest
@@ -7,5 +6,8 @@ services:
     volumes:
       - /opt/jellyfin/config:/config
       - /opt/jellyfin/cache:/cache
-      - /opt/jellyfin/media:/media
+      - /media:/media:ro   # <— point to your actual host /media
+    logging:
+      driver: journald
     restart: unless-stopped
+
