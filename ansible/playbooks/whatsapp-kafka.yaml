@@ -1,0 +1,10 @@
+---
+- hosts: homelab
+  become: yes
+  vars:
+    # Optionally override topic/network, etc, here
+    # kafka_topic_whatsapp: whatsapp-messages
+  roles:
+    - kafka
+    - whatsapp_logger
+

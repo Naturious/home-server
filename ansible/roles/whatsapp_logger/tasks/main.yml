@@ -1,0 +1,44 @@
+---
+- name: Ensure WhatsApp logger directory exists
+  file:
+    path: /opt/whatsapp_logger
+    state: directory
+    mode: "0755"
+
+- name: Copy consumer.py
+  copy:
+    src: consumer.py
+    dest: /opt/whatsapp_logger/consumer.py
+    mode: "0644"
+
+- name: Copy Dockerfile
+  copy:
+    src: Dockerfile
+    dest: /opt/whatsapp_logger/Dockerfile
+    mode: "0644"
+
+- name: Build WhatsApp logger image
+  community.docker.docker_image:
+    name: whatsapp-logger
+    tag: latest
+    build:
+      path: /opt/whatsapp_logger
+    source: build
+
+- name: Run WhatsApp logger container
+  community.docker.docker_container:
+    name: whatsapp-logger
+    image: whatsapp-logger:latest
+    state: started
+    restart_policy: unless-stopped
+    networks:
+      - name: "{{ kafka_network_name | default('kafka-net') }}"
+    env:
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+      KAFKA_TOPIC: "whatsapp-messages"
+      KAFKA_GROUP_ID: "whatsapp-logger"
+    log_driver: json-file
+    log_options:
+      max-size: "10m"
+      max-file: "3"
+

@@ -1,5 +1,5 @@
 - name: Deploy Jellyfin with Docker
-  hosts: media
+  hosts: homelab
   become: yes
 
   roles:
