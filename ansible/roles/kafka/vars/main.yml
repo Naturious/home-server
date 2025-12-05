@@ -1,6 +1,4 @@
 kafka_network_name: kafka-net
-kafka_zookeeper_image: "confluentinc/cp-zookeeper:latest"
 kafka_image: "confluentinc/cp-kafka:latest"
 kafka_container_name: kafka
-zookeeper_container_name: zookeeper
 
