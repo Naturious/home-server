@@ -6,6 +6,9 @@ topic = os.getenv("KAFKA_TOPIC", "whatsapp-messages")
 bootstrap_servers = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "kafka:9092")
 group_id = os.getenv("KAFKA_GROUP_ID", "whatsapp-logger")
 
+def process_message(msg):
+    print(f"[WHATSAPP] partition={msg.partition} offset={msg.offset} value={msg.value}")
+
 def main():
     print(f"Starting WhatsApp logger. Topic={topic}, bootstrap_servers={bootstrap_servers}")
     while True:
@@ -20,7 +23,7 @@ def main():
             )
 
             for msg in consumer:
-                print(f"[WHATSAPP] partition={msg.partition} offset={msg.offset} value={msg.value}")
+                process_message(msg)
         except Exception as e:
             print(f"Error in consumer loop: {e}")
             time.sleep(5)
