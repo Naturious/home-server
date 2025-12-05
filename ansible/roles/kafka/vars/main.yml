@@ -1,0 +1,4 @@
+kafka_network_name: kafka-net
+kafka_image: "confluentinc/cp-kafka:latest"
+kafka_container_name: kafka
+
