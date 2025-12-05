@@ -1,0 +1,11 @@
+- name: Run WAHA container
+  community.docker.docker_container:
+    name: "waha"
+    image: "devlikeapro/waha"
+    state: started
+    recreate: true          # Ensures it restarts cleanly when image changes
+    ports:
+      - "3000:3000/tcp"
+    auto_remove: true       # --rm
+    pull: yes
+

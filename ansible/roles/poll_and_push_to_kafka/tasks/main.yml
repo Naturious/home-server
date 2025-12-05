@@ -1,0 +1,50 @@
+---
+- name: Ensure PPK logger directory exists
+  file:
+    path: /opt/ppk
+    state: directory
+    mode: "0755"
+
+- name: Copy app.py
+  copy:
+    src: app.py
+    dest: /opt/ppk/app.py
+    mode: "0644"
+
+- name: Copy requirements.txt
+  copy:
+    src: requirements.txt
+    dest: /opt/ppk/requirements.txt
+    mode: "0644"
+
+- name: Copy Dockerfile
+  copy:
+    src: Dockerfile
+    dest: /opt/ppk/Dockerfile
+    mode: "0644"
+
+- name: Build Poll and Push to kafka image
+  community.docker.docker_image:
+    name: poll-and-push-to-kafka
+    tag: latest
+    build:
+      path: /opt/ppk
+    source: build
+
+- name: Run Poll and push to kafka image
+  community.docker.docker_container:
+    name: poll-and-push-to-kafka
+    image: poll-and-push-to-kafka:latest
+    state: started
+    restart_policy: unless-stopped
+    networks:
+      - name: "{{ kafka_network_name | default('kafka-net') }}"
+    env:
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+      KAFKA_TOPIC: "whatsapp-messages"
+      KAFKA_GROUP_ID: "whatsapp-logger"
+    log_driver: json-file
+    log_options:
+      max-size: "10m"
+      max-file: "3"
+
