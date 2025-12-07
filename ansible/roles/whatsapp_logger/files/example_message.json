@@ -1,0 +1,21 @@
+{
+    "id": "false_31615886012-1633085152@g.us_3AC36C312EC0607FEC6C_191465464549445@lid",
+    "timestamp": 1764939046,
+    "from": "31615886012-1633085152@g.us",
+    "fromMe": false,
+    "participant": "191465464549445@lid",
+    "source": "app",
+    "to": "31685039540@c.us",
+    "body": "Today we start at 19:00, all styles welcome 🙏🙏",
+    "hasMedia": true,
+    "media": {
+      "url": "http://localhost:3000/api/files/default/false_31615886012-1633085152@g.us_3AC36C312EC0607FEC6C_191465464549445@lid.jpeg",
+      "filename": null,
+      "mimetype": "image/jpeg"
+    },
+    "ack": 1,
+    "ackName": "SERVER",
+    "location": null,
+    "vCards": []
+}
+

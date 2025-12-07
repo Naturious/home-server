@@ -1,0 +1,8 @@
+{
+  "typeCheckingMode": "basic",
+
+  // Turn off the noisy “Argument of type X cannot be assigned…”
+  "reportGeneralTypeIssues": "none",
+  "reportArgumentType": "none",
+  "reportAssignmentType": "none" 
+}
